@@ -5,6 +5,7 @@ import RoleSwitcher from './components/common/RoleSwitcher';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import NotificationToast from './components/common/NotificationToast';
+import SupportChatModal from './components/common/SupportChatModal';
 import CartDrawer from './components/customer/CartDrawer';
 import CheckoutModal from './components/customer/CheckoutModal';
 
@@ -204,8 +205,9 @@ function MainAppContent() {
         </main>
       )}
 
-      {/* Live Global Notification Toast */}
+      {/* Live Global Notification Toast & 24/7 Support */}
       <NotificationToast />
+      <SupportChatModal />
 
     </div>
   );

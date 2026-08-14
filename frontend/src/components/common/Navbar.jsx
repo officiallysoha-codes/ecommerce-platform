@@ -78,9 +78,9 @@ export default function Navbar({
             </div>
           </div>
 
-          {/* Search Bar */}
+          {/* Search Bar with Voice Search */}
           <div className="flex-1 max-w-xl hidden md:block">
-            <div className="relative">
+            <div className="relative flex items-center">
               <input
                 type="text"
                 value={searchTerm}
@@ -88,15 +88,44 @@ export default function Navbar({
                 onFocus={() => setIsSearchFocused(true)}
                 onBlur={() => setTimeout(() => setIsSearchFocused(false), 200)}
                 placeholder="Search fresh mangoes, milk, atta, oil, tea, snacks..."
-                className="w-full bg-slate-100/80 hover:bg-slate-100 focus:bg-white text-slate-900 pl-11 pr-4 py-2.5 rounded-2xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 text-sm outline-none transition-all placeholder:text-slate-400 shadow-inner"
+                className="w-full bg-slate-100/80 hover:bg-slate-100 focus:bg-white text-slate-900 pl-11 pr-16 py-2.5 rounded-2xl border border-slate-200 focus:border-emerald-500 focus:ring-4 focus:ring-emerald-500/10 text-sm outline-none transition-all placeholder:text-slate-400 shadow-inner"
               />
               <Search className="w-5 h-5 text-slate-400 absolute left-3.5 top-3 pointer-events-none" />
+              
+              {/* Voice Search Button */}
+              <button
+                type="button"
+                onClick={() => {
+                  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+                  if (SpeechRecognition) {
+                    const recognition = new SpeechRecognition();
+                    recognition.onstart = () => {
+                      setSearchTerm('Listening...');
+                    };
+                    recognition.onresult = (event) => {
+                      const transcript = event.results[0][0].transcript;
+                      setSearchTerm(transcript);
+                    };
+                    recognition.onerror = () => {
+                      setSearchTerm('');
+                    };
+                    recognition.start();
+                  } else {
+                    alert('Voice search is supported on Chrome, Edge, and Safari.');
+                  }
+                }}
+                className="absolute right-9 text-slate-400 hover:text-emerald-600 p-1 transition-colors"
+                title="Search with Voice"
+              >
+                <Sparkles className="w-4 h-4 text-emerald-500" />
+              </button>
+
               {searchTerm && (
                 <button
                   onClick={() => setSearchTerm('')}
-                  className="absolute right-3.5 top-3 text-slate-400 hover:text-slate-600 text-xs font-semibold"
+                  className="absolute right-3 text-slate-400 hover:text-slate-600 text-xs font-semibold"
                 >
-                  Clear
+                  ✕
                 </button>
               )}
             </div>
