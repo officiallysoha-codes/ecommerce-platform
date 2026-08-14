@@ -1,7 +1,8 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { initDB } from './db.js';
+import db, { initDB } from './db.js';
+import { runSeed } from './data/seed.js';
 
 import authRoutes from './routes/authRoutes.js';
 import productRoutes from './routes/productRoutes.js';
@@ -17,6 +18,13 @@ const PORT = process.env.PORT || 5000;
 
 // Initialize SQLite database schema
 initDB();
+
+// Auto-seed database if empty
+const userCount = db.prepare('SELECT COUNT(*) as count FROM users').get().count;
+if (userCount === 0) {
+  console.log('🔄 Fresh database detected. Auto-populating initial commercial catalog...');
+  runSeed();
+}
 
 // Middlewares
 app.use(cors());
