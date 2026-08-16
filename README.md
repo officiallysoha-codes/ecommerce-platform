@@ -1,4 +1,4 @@
-# 🛒 GreenZet — Modern Multi-Vendor Hyperlocal E-Commerce Platform
+# 🛒 FreshCart — Modern Multi-Vendor Hyperlocal E-Commerce Platform
 
 A production-ready, custom-built Multi-Vendor E-Commerce and Grocery Delivery platform inspired by enterprise e-commerce specifications. Built completely from scratch with **React 18**, **Tailwind CSS**, **Node.js / Express**, and **SQLite**.
 
