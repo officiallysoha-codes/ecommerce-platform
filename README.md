@@ -72,7 +72,7 @@ npm run dev      # Runs on http://127.0.0.1:5173
 
 ## 🐙 How to Push to GitHub
 
-1. Create a new empty repository on [github.com](https://github.com/new) named `greenzet-ecommerce`.
+1. Create a new empty repository on [github.com](https://github.com/new) named `FreshCart-ecommerce`.
 2. Run these commands inside the project root folder:
 
 ```bash
